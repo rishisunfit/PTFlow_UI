@@ -1,0 +1,357 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "mint": {
+          "50": "#f0fdf4",
+          "100": "#dcfce7",
+          "200": "#bbf7d0",
+          "300": "#86efac",
+          "400": "#4ade80",
+          "500": "#22c55e",
+          "600": "#16a34a",
+          "700": "#15803d",
+          "800": "#166534"
+        }
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-gray-50">
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-mint-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">FitPro</span>
+                    </div>
+                    <nav class="flex space-x-8">
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Dashboard</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Clients + Groups</span>
+                        <span class="nav-item text-mint-600 font-medium transition-colors active cursor-pointer" onclick="setActiveNav(this); toggleSubNav()">Training Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Nutrition Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Inbox</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">AI Flows</span>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+            </div>
+        </div>
+        
+        <div id="sub-nav" class="bg-mint-50 border-t border-mint-200 px-6 py-3">
+            <nav class="flex space-x-8">
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Program Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Workout Library</span>
+                <span class="sub-nav-item text-mint-700 font-medium border-b-2 border-mint-500 pb-2 active cursor-pointer" onclick="setActiveSubNav(this)">Exercise Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Video On-Demand</span>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="px-6 py-8">
+        <div class="max-w-7xl mx-auto">
+            <section id="exercises-section">
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold text-gray-900">Exercises</h1>
+                        <button class="bg-mint-500 hover:bg-mint-600 text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-colors">
+                            <i class="fas fa-plus"></i>
+                            <span>Add New Exercise</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="relative max-w-md">
+                            <input type="text" placeholder="Search exercises" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div id="filter-tabs" class="mb-8">
+    <div class="flex items-center justify-between">
+        <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg w-fit">
+            <button class="filter-tab px-4 py-2 text-sm font-medium rounded-md bg-white text-mint-700 shadow-sm active" onclick="setActiveFilter(this)">All</button>
+            <button class="filter-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveFilter(this)">Upper Body</button>
+            <button class="filter-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveFilter(this)">Lower Body</button>
+            <button class="filter-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveFilter(this)">Core</button>
+        </div>
+        <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg w-fit">
+            <button class="exercise-nav-tab px-4 py-2 text-sm font-medium rounded-md bg-white text-mint-700 shadow-sm active" onclick="setActiveExerciseNav(this)">All Exercises</button>
+            <button class="exercise-nav-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveExerciseNav(this)">My Exercises</button>
+        </div>
+    </div>
+</div>
+                </div>
+
+                <div id="exercises-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/4035b89eaa-f8c73e8bed6af0ebaabf.png" alt="person doing push-ups exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Push-ups</h3>
+                            <p class="text-sm text-gray-600">Chest, Shoulders, Triceps</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/8787935419-797c2175737291371e1c.png" alt="person doing squats exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Squats</h3>
+                            <p class="text-sm text-gray-600">Quadriceps, Glutes, Hamstrings</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/8fd6b3cbac-30f2719ad247c9a95335.png" alt="person doing deadlift exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Deadlifts</h3>
+                            <p class="text-sm text-gray-600">Hamstrings, Glutes, Lower Back</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/106d5db6aa-4882dedbb433f8213d69.png" alt="person doing plank exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Plank</h3>
+                            <p class="text-sm text-gray-600">Core, Shoulders, Back</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/fe74c5ff24-f95046855420f8ef1bad.png" alt="person doing pull-ups exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Pull-ups</h3>
+                            <p class="text-sm text-gray-600">Lats, Biceps, Rhomboids</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/19b8002265-c2ab840add4065576f8f.png" alt="person doing lunges exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Lunges</h3>
+                            <p class="text-sm text-gray-600">Quadriceps, Glutes, Calves</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/f92363f388-c8ef3ac6efeea1ad3239.png" alt="person doing bench press exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Bench Press</h3>
+                            <p class="text-sm text-gray-600">Chest, Shoulders, Triceps</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/2ee2e3ad3e-eb28730d39d3ccb4c90c.png" alt="person doing mountain climbers exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Mountain Climbers</h3>
+                            <p class="text-sm text-gray-600">Core, Shoulders, Legs</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/28739dcb32-0b73dafc0bc3297d378f.png" alt="person doing burpees exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Burpees</h3>
+                            <p class="text-sm text-gray-600">Full Body, Cardio</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="relative">
+                            <img class="w-full h-40 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1d503a5803-9b5d0a2b098045dca324.png" alt="person doing bicep curls exercise demonstration">
+                            <div class="absolute top-3 right-3 flex space-x-2">
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-mint-50 transition-colors">
+                                    <i class="fas fa-edit text-sm"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-trash text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-2">Bicep Curls</h3>
+                            <p class="text-sm text-gray-600">Biceps, Forearms</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('text-mint-600', 'active');
+                item.classList.add('text-gray-600');
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('text-mint-600', 'active');
+            
+            if (element.textContent.trim() !== 'Training Hub') {
+                document.getElementById('sub-nav').style.display = 'none';
+            }
+        }
+
+        function toggleSubNav() {
+            const subNav = document.getElementById('sub-nav');
+            subNav.style.display = 'block';
+        }
+
+        function setActiveSubNav(element) {
+            document.querySelectorAll('.sub-nav-item').forEach(item => {
+                item.classList.remove('text-mint-700', 'border-mint-500', 'active');
+                item.classList.add('text-gray-600');
+                item.style.borderBottom = 'none';
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('text-mint-700', 'active');
+            element.style.borderBottom = '2px solid rgb(34 197 94)';
+        }
+
+        function setActiveFilter(element) {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('bg-white', 'text-mint-700', 'shadow-sm', 'active');
+                tab.classList.add('text-gray-600');
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('bg-white', 'text-mint-700', 'shadow-sm', 'active');
+        }
+    </script>
+
+</body></html>

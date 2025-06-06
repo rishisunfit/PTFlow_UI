@@ -1,0 +1,341 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "mint": {
+          "50": "#f0fdf4",
+          "100": "#dcfce7",
+          "200": "#bbf7d0",
+          "300": "#86efac",
+          "400": "#4ade80",
+          "500": "#22c55e",
+          "600": "#16a34a",
+          "700": "#15803d",
+          "800": "#166534"
+        }
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-gray-50">
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-mint-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">FitPro</span>
+                    </div>
+                    <nav class="flex space-x-8">
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Dashboard</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Clients + Groups</span>
+                        <span class="nav-item text-mint-600 font-medium transition-colors active cursor-pointer" onclick="setActiveNav(this); toggleSubNav()">Training Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Nutrition Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Inbox</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">AI Flows</span>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+            </div>
+        </div>
+        
+        <div id="sub-nav" class="bg-mint-50 border-t border-mint-200 px-6 py-3">
+            <nav class="flex space-x-8">
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Program Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Workout Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Exercise Library</span>
+                <span class="sub-nav-item text-mint-700 font-medium border-b-2 border-mint-500 pb-2 active cursor-pointer" onclick="setActiveSubNav(this)">Video On-Demand</span>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="px-6 py-8">
+        <div class="max-w-7xl mx-auto">
+            <section id="video-section">
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold text-gray-900">Video On-Demand</h1>
+                        <button class="bg-mint-500 hover:bg-mint-600 text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-colors">
+                            <i class="fas fa-plus"></i>
+                            <span>Add New Section</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="relative max-w-md">
+                            <input type="text" placeholder="Search videos" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div id="video-tabs" class="mb-8">
+                        <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg w-fit">
+                            <button class="video-tab px-4 py-2 text-sm font-medium rounded-md bg-white text-mint-700 shadow-sm active" onclick="setActiveVideoTab(this, 'follow-along-workouts')">Follow-Along Workouts</button>
+                            <button class="video-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveVideoTab(this, 'follow-along-stretching')">Follow-Along Stretching</button>
+                            <button class="video-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveVideoTab(this, 'follow-along-recipes')">Follow-Along Video Recipes</button>
+                            <button class="video-tab px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveVideoTab(this, 'principles-education')">Principles &amp; Education</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="follow-along-workouts" class="video-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/e3d1d3d410-795e6df63bc45588e123.png" alt="fitness instructor leading high intensity interval training HIIT workout in modern gym studio">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    45:30
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">HIIT Full Body Workout</h3>
+                                <p class="text-sm text-gray-600 mb-2">High-intensity interval training for maximum results</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>45 min</span>
+                                    <span>Advanced</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/9a399f6606-9d5e47443055d7eaf24c.png" alt="yoga instructor demonstrating strength training poses in bright studio">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    30:15
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Strength &amp; Flow Yoga</h3>
+                                <p class="text-sm text-gray-600 mb-2">Build strength while improving flexibility</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>30 min</span>
+                                    <span>Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6a9541e6e1-5d96ccada5bab5097fc5.png" alt="cardio dance workout class with energetic instructor in colorful gym">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    25:45
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Cardio Dance Party</h3>
+                                <p class="text-sm text-gray-600 mb-2">Fun dance workout to burn calories</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>25 min</span>
+                                    <span>Beginner</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/40c288877c-c7312e126e1b69d70470.png" alt="personal trainer demonstrating core strengthening exercises on exercise mat">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    20:00
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Core Blast Workout</h3>
+                                <p class="text-sm text-gray-600 mb-2">Targeted core strengthening routine</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>20 min</span>
+                                    <span>Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="follow-along-stretching" class="video-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7dfdd83c35-e017e4edb92a96ed64da.png" alt="peaceful morning yoga stretching session in sunlit studio">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    15:30
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Morning Stretch Routine</h3>
+                                <p class="text-sm text-gray-600 mb-2">Gentle stretches to start your day</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>15 min</span>
+                                    <span>Beginner</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/5b10186bc9-ce5332ff1d2c92638722.png" alt="deep stretching and flexibility routine in calm yoga studio">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    25:00
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Deep Flexibility Flow</h3>
+                                <p class="text-sm text-gray-600 mb-2">Improve flexibility and mobility</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>25 min</span>
+                                    <span>Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="follow-along-recipes" class="video-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/bd2711d477-9340634a933a4fb28dd2.png" alt="chef preparing healthy protein smoothie bowl in modern kitchen">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    12:15
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Protein Power Smoothie</h3>
+                                <p class="text-sm text-gray-600 mb-2">Post-workout recovery smoothie recipe</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>12 min</span>
+                                    <span>Easy</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b75ac7f04c-525c768f7af310724e72.png" alt="nutritionist preparing balanced meal prep containers with vegetables and lean protein">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    18:45
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Weekly Meal Prep</h3>
+                                <p class="text-sm text-gray-600 mb-2">Prepare healthy meals for the week</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>18 min</span>
+                                    <span>Intermediate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="principles-education" class="video-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/92b0202169-d4e40147d12542cfcecf.png" alt="fitness expert explaining exercise form and technique in educational setting">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                                    <button class="w-12 h-12 bg-white bg-opacity-90 rounded-full flex items-center justify-center text-mint-600 hover:bg-opacity-100 transition-all">
+                                        <i class="fas fa-play text-lg ml-1"></i>
+                                    </button>
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    22:30
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-semibold text-gray-900 mb-2">Proper Form Fundamentals</h3>
+                                <p class="text-sm text-gray-600 mb-2">Learn correct exercise technique</p>
+                                <div class="flex items-center justify-between text-xs text-gray-500">
+                                    <span>22 min</span>
+                                    <span>Educational</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                            <div class="relative">
+                                <img class="w-full h-48 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/30d64ad27d-5ae6d3ba152530e3aff4.png" alt="nutrition specialist explaining macronutrients and meal planning concepts">
+                                </div></div></div></div></section></div></main></body></html>

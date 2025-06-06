@@ -1,0 +1,339 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "mint": {
+          "50": "#f0fdf4",
+          "100": "#dcfce7",
+          "200": "#bbf7d0",
+          "300": "#86efac",
+          "400": "#4ade80",
+          "500": "#22c55e",
+          "600": "#16a34a",
+          "700": "#15803d",
+          "800": "#166534"
+        }
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="bg-gray-50">
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-mint-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">FitPro</span>
+                    </div>
+                    <nav class="flex space-x-8">
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Dashboard</span>
+                        <span class="nav-item text-mint-600 font-medium transition-colors active cursor-pointer" onclick="setActiveNav(this); toggleClientsSubNav()">Clients + Groups</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Training Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Nutrition Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Inbox</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">AI Flows</span>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+            </div>
+        </div>
+        
+        <div id="clients-sub-nav" class="bg-mint-50 border-t border-mint-200 px-6 py-3">
+            <nav class="flex space-x-8">
+                <span class="clients-sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveClientsSubNav(this)">Clients</span>
+                <span class="clients-sub-nav-item text-mint-700 font-medium border-b-2 border-mint-500 pb-2 active cursor-pointer" onclick="setActiveClientsSubNav(this)">Groups</span>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="h-[calc(100vh-120px)]">
+        <div class="flex h-full">
+            <aside id="groups-sidebar" class="w-80 bg-white border-r border-gray-200 flex-shrink-0">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-gray-900">Groups</h2>
+                        <button class="bg-mint-500 hover:bg-mint-600 text-white p-2 rounded-lg transition-colors">
+                            <i class="fas fa-plus text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="relative">
+                        <input type="text" placeholder="Search groups" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none text-sm">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <div id="groups-list" class="overflow-y-auto h-full">
+                    <div class="group-item bg-mint-50 border-r-4 border-mint-500 p-4 cursor-pointer active" onclick="setActiveGroup(this)">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-mint-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 truncate">Strength Training</h3>
+                                <p class="text-sm text-gray-500 truncate">24 members</p>
+                                <p class="text-xs text-gray-400">Last message 2h ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="group-item p-4 cursor-pointer hover:bg-gray-50 transition-colors" onclick="setActiveGroup(this)">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 truncate">Cardio Warriors</h3>
+                                <p class="text-sm text-gray-500 truncate">18 members</p>
+                                <p class="text-xs text-gray-400">Last message 1d ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="group-item p-4 cursor-pointer hover:bg-gray-50 transition-colors" onclick="setActiveGroup(this)">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-leaf text-white"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 truncate">Nutrition Support</h3>
+                                <p class="text-sm text-gray-500 truncate">32 members</p>
+                                <p class="text-xs text-gray-400">Last message 3h ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="group-item p-4 cursor-pointer hover:bg-gray-50 transition-colors" onclick="setActiveGroup(this)">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-running text-white"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 truncate">Marathon Prep</h3>
+                                <p class="text-sm text-gray-500 truncate">12 members</p>
+                                <p class="text-xs text-gray-400">Last message 5h ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section id="chat-section" class="flex-1 flex flex-col">
+                <div id="chat-header" class="bg-white border-b border-gray-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-mint-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Strength Training</h2>
+                                <p class="text-sm text-gray-500">24 members • 15 online</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <button class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i class="fas fa-phone"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i class="fas fa-video"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Sarah" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-semibold text-gray-900">Sarah Johnson</span>
+                                <span class="text-xs text-gray-500">2:30 PM</span>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 max-w-md">
+                                <p class="text-gray-900">Just finished my deadlift session! Hit a new PR of 185lbs! 💪</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Mike" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-semibold text-gray-900">Mike Rodriguez</span>
+                                <span class="text-xs text-gray-500">2:32 PM</span>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 max-w-md">
+                                <p class="text-gray-900">Amazing work Sarah! That's incredible progress 🔥</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3 flex-row-reverse">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="You" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1 justify-end">
+                                <span class="text-xs text-gray-500">2:35 PM</span>
+                                <span class="font-semibold text-gray-900">You</span>
+                            </div>
+                            <div class="bg-mint-500 text-white rounded-lg p-3 max-w-md ml-auto">
+                                <p>Congratulations Sarah! Your form has improved so much. Keep up the excellent work everyone! 👏</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="David" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-semibold text-gray-900">David Wilson</span>
+                                <span class="text-xs text-gray-500">2:40 PM</span>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 max-w-md">
+                                <p class="text-gray-900">Anyone up for a group session tomorrow morning? I'm thinking 7 AM?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="chat-input" class="bg-white border-t border-gray-200 p-6">
+                    <div class="flex items-center space-x-4">
+                        <button class="p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <div class="flex-1 relative">
+                            <input type="text" placeholder="Type a message..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+                        </div>
+                        <button class="bg-mint-500 hover:bg-mint-600 text-white p-3 rounded-lg transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <aside id="members-sidebar" class="w-80 bg-white border-l border-gray-200 flex-shrink-0">
+                <div class="p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Members (24)</h3>
+                    <div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                        <button class="member-filter px-3 py-2 text-sm font-medium rounded-md bg-white text-mint-700 shadow-sm active" onclick="setActiveMemberFilter(this)">All</button>
+                        <button class="member-filter px-3 py-2 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900 transition-colors" onclick="setActiveMemberFilter(this)">Online</button>
+                    </div>
+                </div>
+
+                <div id="members-list" class="overflow-y-auto h-full p-4 space-y-3">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Sarah" class="w-10 h-10 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate">Sarah Johnson</h4>
+                            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">1:1 Client</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Mike" class="w-10 h-10 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate">Mike Rodriguez</h4>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">Paid Member</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Emily" class="w-10 h-10 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-gray-400 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate">Emily Chen</h4>
+                            <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-medium">Groupie</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="David" class="w-10 h-10 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate">David Wilson</h4>
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">Paid Member</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Lisa" class="w-10 h-10 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-gray-400 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate">Lisa Thompson</h4>
+                            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-medium">1:1 Client</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="James" class="w-10 h-10 rounded-full">
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-gray-900 truncate">James Parker</h4>
+                            <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-medium">Groupie</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="relative">
+                </div></div></div></aside></div></main></body></html>

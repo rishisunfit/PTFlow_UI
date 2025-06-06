@@ -1,0 +1,274 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "fontFamily": {
+        "sf": [
+          "SF Pro Display",
+          "system-ui",
+          "sans-serif"
+        ],
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      },
+      "colors": {
+        "accent": "#10b981",
+        "accent-light": "#6ee7b7",
+        "accent-dark": "#047857",
+        "gold": "#d4af37",
+        "charcoal": "#1f2937",
+        "light-gray": "#f8fafc",
+        "mid-gray": "#64748b"
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+      body {
+        font-family: 'Inter', sans-serif !important;
+      }
+      
+      /* Preserve Font Awesome icons */
+      .fa, .fas, .far, .fal, .fab {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+      }
+    </style><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="font-sf bg-light-gray text-charcoal max-w-md mx-auto h-screen flex flex-col">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-white p-3 flex justify-between items-center border-b border-gray-100">
+        <div class="text-sm font-medium">9:41</div>
+        <div class="flex space-x-2 text-charcoal">
+            <i class="fa-solid fa-signal text-sm"></i>
+            <i class="fa-solid fa-wifi text-sm"></i>
+            <i class="fa-solid fa-battery-full text-sm"></i>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <div id="inbox-header" class="bg-white p-4 border-b border-gray-100">
+        <div class="flex justify-between items-center mb-3">
+            <h1 class="text-xl font-semibold text-charcoal">Messages</h1>
+        </div>
+        
+        <!-- Toggle Buttons -->
+        <div id="chat-toggle" class="flex bg-gray-100 rounded-xl p-1">
+            <button id="coach-btn" class="flex-1 px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 bg-charcoal text-white" onclick="toggleChatView('coach')">
+                Coach Chat
+            </button>
+            <button id="group-btn" class="flex-1 px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 text-mid-gray" onclick="toggleChatView('group')">
+                Group Chat
+            </button>
+            <button id="forum-btn" class="flex-1 px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 text-mid-gray" onclick="toggleChatView('forum')">
+                Forums
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div id="main-content" class="flex-1 overflow-y-auto pb-32">
+        <!-- Coach Chats -->
+        <div id="coach-chats" class="p-6">
+            <div class="space-y-4">
+                <!-- Coach Message -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Coach" class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1">
+                        <div class="bg-blue-500 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">Great work on today's session! How are you feeling about the new routine?</p>
+                        </div>
+                        <span class="text-xs text-mid-gray mt-1 block">2m ago</span>
+                    </div>
+                </div>
+                
+                <!-- User Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex justify-end">
+                        <div class="bg-white border border-gray-200 text-charcoal rounded-2xl rounded-br-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">Feeling great! The new exercises are challenging but I can already feel the difference</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coach Message -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Coach" class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1">
+                        <div class="bg-blue-500 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">That's exactly what I like to hear! Remember to focus on your breathing during the lifts</p>
+                        </div>
+                        <span class="text-xs text-mid-gray mt-1 block">1h ago</span>
+                    </div>
+                </div>
+                
+                <!-- User Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex justify-end">
+                        <div class="bg-white border border-gray-200 text-charcoal rounded-2xl rounded-br-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">Will do! Should I increase the weight next session?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Group Chats -->
+        <div id="group-chats" class="p-6 hidden">
+            <div class="space-y-4">
+                <!-- Other Member Message -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Alex" class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1">
+                        <div class="bg-green-500 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-xs">
+                            <p class="text-xs font-medium text-green-100 mb-1">Alex</p>
+                            <p class="text-sm">Who's joining the 6am session tomorrow?</p>
+                        </div>
+                        <span class="text-xs text-mid-gray mt-1 block">15m ago</span>
+                    </div>
+                </div>
+                
+                <!-- User Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex justify-end">
+                        <div class="bg-white border border-gray-200 text-charcoal rounded-2xl rounded-br-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">Count me in! 🙋‍♀️</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Another Member Message -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Maria" class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1">
+                        <div class="bg-green-500 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-xs">
+                            <p class="text-xs font-medium text-green-100 mb-1">Maria</p>
+                            <p class="text-sm">I'll be there too! Let's crush it 💪</p>
+                        </div>
+                        <span class="text-xs text-mid-gray mt-1 block">12m ago</span>
+                    </div>
+                </div>
+                
+                <!-- Coach Message in Group -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Coach" class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1">
+                        <div class="bg-blue-500 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-xs">
+                            <p class="text-xs font-medium text-blue-100 mb-1">Coach Mike</p>
+                            <p class="text-sm">Love the energy team! We'll focus on compound movements tomorrow</p>
+                        </div>
+                        <span class="text-xs text-mid-gray mt-1 block">10m ago</span>
+                    </div>
+                </div>
+                
+                <!-- User Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex justify-end">
+                        <div class="bg-white border border-gray-200 text-charcoal rounded-2xl rounded-br-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">Perfect! See you all bright and early ☀️</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Another Member Message -->
+                <div class="flex items-start space-x-3">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Jake" class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1">
+                        <div class="bg-green-500 text-white rounded-2xl rounded-bl-md px-4 py-3 max-w-xs">
+                            <p class="text-xs font-medium text-green-100 mb-1">Jake</p>
+                            <p class="text-sm">Can't wait! Been working on my deadlift form all week</p>
+                        </div>
+                        <span class="text-xs text-mid-gray mt-1 block">5m ago</span>
+                    </div>
+                </div>
+                
+                <!-- User Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex justify-end">
+                        <div class="bg-white border border-gray-200 text-charcoal rounded-2xl rounded-br-md px-4 py-3 max-w-xs">
+                            <p class="text-sm">Nice! I've been practicing my squats too 🏋️‍♀️</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Forums -->
+        <div id="forum-chats" class="p-6 hidden">
+            <div class="space-y-4">
+                <div class="text-center text-mid-gray">
+                    <i class="fa-solid fa-comments text-2xl mb-2"></i>
+                    <p class="text-sm">Forums coming soon!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Message Input -->
+    <div id="message-input" class="bg-white border-t border-gray-100 p-4">
+        <div class="flex items-center space-x-3">
+            <button class="text-mid-gray">
+                <i class="fa-solid fa-plus text-lg"></i>
+            </button>
+            <div class="flex-1 bg-gray-100 rounded-full px-4 py-2">
+                <input type="text" placeholder="Type a message..." class="bg-transparent w-full outline-none text-sm">
+            </div>
+            <button class="text-accent">
+                <i class="fa-solid fa-paper-plane text-lg"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div id="bottom-nav" class="bg-white/95 backdrop-blur-lg border-t border-gray-100 py-3 px-6">
+        <div class="flex justify-between items-center">
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-house text-lg mb-1"></i>
+                <span class="text-xs font-light">Home</span>
+            </div>
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-dumbbell text-lg mb-1"></i>
+                <span class="text-xs font-light">Workouts</span>
+            </div>
+            <div class="flex flex-col items-center text-accent">
+                <i class="fa-solid fa-inbox text-lg mb-1"></i>
+                <span class="text-xs font-medium">Inbox</span>
+            </div>
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-utensils text-lg mb-1"></i>
+                <span class="text-xs font-light">Nutrition</span>
+            </div>
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-user text-lg mb-1"></i>
+                <span class="text-xs font-light">Profile</span>
+            </div>
+        </div>
+    </div>
+
+</body></html>

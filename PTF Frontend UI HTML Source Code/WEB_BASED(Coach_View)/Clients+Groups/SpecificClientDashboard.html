@@ -1,0 +1,358 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "mint": {
+          "50": "#f0fdf4",
+          "100": "#dcfce7",
+          "200": "#bbf7d0",
+          "300": "#86efac",
+          "400": "#4ade80",
+          "500": "#22c55e",
+          "600": "#16a34a",
+          "700": "#15803d",
+          "800": "#166534"
+        }
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head><body class="bg-gray-50">
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-mint-500 rounded-lg flex items-center justify-center">
+                            <i class="text-white text-sm" data-fa-i2svg=""><svg class="svg-inline--fa fa-dumbbell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dumbbell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M96 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V224v64V448c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32V288c-17.7 0-32-14.3-32-32s14.3-32 32-32V160c0-17.7 14.3-32 32-32H96V64zm448 0v64h32c17.7 0 32 14.3 32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32v64c0 17.7-14.3 32-32 32H544v64c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32V288 224 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32zM416 224v64H224V224H416z"></path></svg></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">FitPro</span>
+                    </div>
+                    <nav class="flex space-x-8">
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Dashboard</span>
+                        <span class="nav-item text-mint-600 font-medium transition-colors active cursor-pointer" onclick="setActiveNav(this); toggleClientsSubNav()">Clients + Groups</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Training Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Nutrition Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Inbox</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">AI Flows</span>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-bell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"></path></svg></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+            </div>
+        </div>
+        
+        <div id="clients-sub-nav" class="bg-mint-50 border-t border-mint-200 px-6 py-3">
+            <nav class="flex space-x-8">
+                <span class="clients-sub-nav-item text-mint-700 font-medium border-b-2 border-mint-500 pb-2 active cursor-pointer" onclick="setActiveClientsSubNav(this)">Clients</span>
+                <span class="clients-sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveClientsSubNav(this)">Groups</span>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="px-6 py-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center space-x-4 mb-8">
+                <button onclick="goBack()" class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i class="text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-arrow-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></i>
+                </button>
+                <h1 class="text-3xl font-bold text-gray-900">Client Dashboard</h1>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Client Info Panel -->
+                <div id="client-info-panel" class="lg:col-span-1 space-y-6">
+    <!-- Client Profile Card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center space-x-4 mb-6">
+            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Client" class="w-16 h-16 rounded-full border-4 border-mint-100">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900">{Client Name}</h2>
+                <div class="flex items-center space-x-2 mt-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        1:1 CLIENT
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Stats -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                <div class="text-2xl font-bold text-gray-900">0</div>
+                <div class="text-sm text-gray-600">Total Workouts</div>
+            </div>
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                <div class="text-2xl font-bold text-gray-900">0</div>
+                <div class="text-sm text-gray-600">Cardio Activities</div>
+            </div>
+        </div>
+
+        <!-- Client Details -->
+        <div class="space-y-3">
+            <div class="flex justify-between">
+                <span class="text-gray-600">Last signed in:</span>
+                <span class="text-gray-900 font-medium">21 May 2025</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Last message sent:</span>
+                <span class="text-gray-900 font-medium">Yesterday</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Last message received:</span>
+                <span class="text-gray-900 font-medium">None</span>
+            </div>
+        </div>
+
+        <!-- Status Tags -->
+        <div class="mt-6">
+            <div class="flex items-center space-x-2">
+                <span class="text-gray-600">Critical Status:</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                    Medium
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal Details -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Personal Details</h3>
+        <div class="space-y-3">
+            <div class="flex justify-between">
+                <span class="text-gray-600">Assigned to trainer:</span>
+                <span class="text-gray-900 font-medium">Shane Additional</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Email:</span>
+                <span class="text-mint-600">rishits@gmail.com</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Age:</span>
+                <span class="text-gray-900 font-medium">34</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Date of birth:</span>
+                <span class="text-gray-900 font-medium">3 Mar 1991</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Height:</span>
+                <span class="text-gray-900 font-medium">8 ft 2.4 in</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Sex:</span>
+                <span class="text-gray-900 font-medium">Male</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-600">Activity level:</span>
+                <span class="text-gray-900 font-medium">Very Active</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connected Apps -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Connected Apps</h3>
+        <div class="space-y-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="text-gray-800 text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-apple" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="apple" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path></svg></i>
+                    <span class="text-gray-700">Apple Watch</span>
+                </div>
+                <button class="text-mint-600 text-sm hover:underline">Ask to Connect</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="text-purple-600 text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-person-running" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="person-running" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M320 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM125.7 175.5c9.9-9.9 23.4-15.5 37.5-15.5c1.9 0 3.8 .1 5.6 .3L137.6 254c-9.3 28 1.7 58.8 26.8 74.5l86.2 53.9-25.4 88.8c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l28.7-100.4c5.9-20.6-2.6-42.6-20.7-53.9L238 299l30.9-82.4 5.1 12.3C289 264.7 323.9 288 362.7 288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H362.7c-12.9 0-24.6-7.8-29.5-19.7l-6.3-15c-14.6-35.1-44.1-61.9-80.5-73.1l-48.7-15c-11.1-3.4-22.7-5.2-34.4-5.2c-31 0-60.8 12.3-82.7 34.3L57.4 153.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l23.1-23.1zM91.2 352H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h69.6c19 0 36.2-11.2 43.9-28.5L157 361.6l-9.5-6c-17.5-10.9-30.5-26.8-37.9-44.9L91.2 352z"></path></svg></i>
+                    <span class="text-gray-700">Fitbit</span>
+                </div>
+                <button class="text-mint-600 text-sm hover:underline">Ask to Connect</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="text-blue-600 text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-dumbbell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dumbbell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M96 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V224v64V448c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32V288c-17.7 0-32-14.3-32-32s14.3-32 32-32V160c0-17.7 14.3-32 32-32H96V64zm448 0v64h32c17.7 0 32 14.3 32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32v64c0 17.7-14.3 32-32 32H544v64c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32V288 224 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32zM416 224v64H224V224H416z"></path></svg></i>
+                    <span class="text-gray-700">MyFitnessPal</span>
+                </div>
+                <button class="text-mint-600 text-sm hover:underline">Ask to Connect</button>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="text-red-500 text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-heart" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path></svg></i>
+                    <span class="text-gray-700">Withings</span>
+                </div>
+                <button class="text-mint-600 text-sm hover:underline">Ask to Connect</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <!-- Main Content Area -->
+                <div id="main-dashboard-content" class="lg:col-span-2 space-y-6">
+                    <!-- Tab Navigation -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="border-b border-gray-200">
+                            <nav class="flex space-x-8 px-6">
+                                <button class="dashboard-tab py-4 px-2 border-b-2 border-mint-500 text-mint-600 font-medium active" onclick="setActiveDashboardTab(this)">Summary</button>
+                                <button class="dashboard-tab py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" onclick="setActiveDashboardTab(this)">OnboardingForms</button>
+                                <button class="dashboard-tab py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" onclick="setActiveDashboardTab(this)">Assessments</button>
+                                <button class="dashboard-tab py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" onclick="setActiveDashboardTab(this)">Key_Conversations</button>
+                                <button class="dashboard-tab py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" onclick="setActiveDashboardTab(this)">Financials</button>
+                            </nav>
+                        </div>
+
+                        <div class="p-6 space-y-8">
+                            <!-- Program Info -->
+                            <div class="bg-gradient-to-r from-mint-50 to-green-50 rounded-xl p-6 border border-mint-200">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-semibold text-gray-900">14-DAY TRIAL PROGRAM</h3>
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-mint-500 text-white">
+                                        MAIN
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <div class="text-sm text-gray-600 mb-1">Week 1 - 4</div>
+                                        <div class="text-gray-900 font-medium">4 weeks (14 May 2025 - 10 Jun 2025)</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm text-gray-600 mb-1">Status</div>
+                                        <div class="flex items-center space-x-2">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                OPEN
+                                            </span>
+                                            <button class="text-mint-600 hover:text-mint-700">
+                                                <i data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Compliance Metrics -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Exercise Compliance -->
+                                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Exercise Compliance</h4>
+                                    <div class="grid grid-cols-3 gap-4 mb-4">
+                                        <div class="text-center">
+                                            <div class="text-xs text-gray-500 mb-2">2 Weeks Ago</div>
+                                            <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                                                <span class="text-lg font-semibold text-gray-400">0%</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-xs text-gray-500 mb-2">1 Week Ago</div>
+                                            <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                                                <span class="text-lg font-semibold text-gray-400">0%</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-xs text-gray-500 mb-2">This Week</div>
+                                            <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                                                <span class="text-lg font-semibold text-gray-400">0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="text-mint-600 text-sm hover:underline">Schedule</button>
+                                    </div>
+                                </div>
+
+                                <!-- Nutrition Compliance -->
+                                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Nutrition Compliance</h4>
+                                    <div class="grid grid-cols-3 gap-4 mb-4">
+                                        <div class="text-center">
+                                            <div class="text-xs text-gray-500 mb-2">2 Weeks Ago</div>
+                                            <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                                                <span class="text-lg font-semibold text-gray-400">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-xs text-gray-500 mb-2">1 Week Ago</div>
+                                            <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                                                <span class="text-lg font-semibold text-gray-400">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="text-xs text-gray-500 mb-2">This Week</div>
+                                            <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                                                <span class="text-lg font-semibold text-gray-400">-</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="text-mint-600 text-sm hover:underline">Set nutrition goal</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Body Weight -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                <h4 class="text-lg font-semibold text-gray-900 mb-4">Body Weight</h4>
+                                <div class="flex items-center justify-center h-32 bg-gray-50 rounded-lg">
+                                    <div class="text-center">
+                                        <div class="text-3xl font-bold text-gray-900 mb-1">220<span class="text-lg text-gray-500">lbs</span></div>
+                                        <div class="w-full h-2 bg-mint-200 rounded-full">
+                                            <div class="w-3/4 h-2 bg-mint-500 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Meal Plan -->
+                            <div class="bg-white rounded-xl border border-gray-200 p-6">
+                                <h4 class="text-lg font-semibold text-gray-900 mb-4">Meal Plan</h4>
+                                <div class="h-24 bg-gray-50 rounded-lg flex items-center justify-center">
+                                    <span class="text-gray-500">No meal plan assigned</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trainer's Notes -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Trainer's Notes</h3>
+                            <button class="text-mint-600 text-sm hover:underline flex items-center space-x-1"></button></div></div></div></div></div></main></body></html>

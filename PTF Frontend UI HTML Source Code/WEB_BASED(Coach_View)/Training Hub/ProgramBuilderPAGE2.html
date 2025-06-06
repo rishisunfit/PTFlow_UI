@@ -1,0 +1,343 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+        .sortable-ghost { opacity: 0.5; }
+        .sortable-chosen { transform: scale(1.02); }
+    </style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "mint": {
+          "50": "#f0fdf4",
+          "100": "#dcfce7",
+          "200": "#bbf7d0",
+          "300": "#86efac",
+          "400": "#4ade80",
+          "500": "#22c55e",
+          "600": "#16a34a",
+          "700": "#15803d",
+          "800": "#166534"
+        }
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head><body class="bg-gray-50">
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-mint-500 rounded-lg flex items-center justify-center">
+                            <i class="text-white text-sm" data-fa-i2svg=""><svg class="svg-inline--fa fa-dumbbell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dumbbell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M96 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V224v64V448c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32V288c-17.7 0-32-14.3-32-32s14.3-32 32-32V160c0-17.7 14.3-32 32-32H96V64zm448 0v64h32c17.7 0 32 14.3 32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32v64c0 17.7-14.3 32-32 32H544v64c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32V288 224 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32zM416 224v64H224V224H416z"></path></svg></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900">FitPro</span>
+                    </div>
+                    <nav class="flex space-x-8">
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Dashboard</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Clients + Groups</span>
+                        <span class="nav-item text-mint-600 font-medium transition-colors active cursor-pointer" onclick="setActiveNav(this); toggleSubNav()">Training Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Nutrition Hub</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Inbox</span>
+                        <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">AI Flows</span>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-bell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"></path></svg></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+            </div>
+        </div>
+        
+        <div id="sub-nav" class="bg-mint-50 border-t border-mint-200 px-6 py-3">
+            <nav class="flex space-x-8">
+                <span class="sub-nav-item text-mint-700 font-medium border-b-2 border-mint-500 pb-2 active cursor-pointer" onclick="setActiveSubNav(this)">Program Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Workout Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Exercise Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Video On-Demand</span>
+            </nav>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto" id="main-content">
+            <section id="program-builder-section" class="">
+                <div class="mb-8">
+                    <button class="flex items-center text-gray-600 hover:text-mint-600 mb-4 transition-colors">
+                        <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-arrow-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></i>
+                        <span class="font-medium">Back</span>
+                    </button>
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900">{Program name here}</h1>
+                            <p class="text-gray-600 mt-2">Drag and drop workouts to design weekly training schedule</p>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-floppy-disk" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="floppy-disk" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path></svg></i>Save Draft
+                            </button>
+                            <button class="bg-mint-500 hover:bg-mint-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                                <i class="mr-2" data-fa-i2svg=""><svg class="svg-inline--fa fa-check" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg></i>Publish Program
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="program-builder-grid" class="grid grid-cols-7 gap-4">
+                    <div id="day-1" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 1</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="1">
+                            <div class="workout-card bg-blue-50 border border-blue-200 rounded-lg p-3 cursor-move" draggable="true">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded">FULL BODY PULL</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></svg></i>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">+ 12 more exercises</p>
+                                <div class="workout-card bg-gray-50 border border-gray-200 rounded p-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-medium text-gray-700">CARDIO</span>
+                                        <span class="text-xs text-gray-500">30 min</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-1">1x</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-2" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 2</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="2">
+                            <div class="workout-card bg-blue-50 border border-blue-200 rounded-lg p-3 cursor-move" draggable="true">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded">AMIT STATIC STRETCH 3-4X/WEEK</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></svg></i>
+                                    </button>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="text-sm text-gray-700 font-medium">2x Calf Stretch</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x Adductor Stretch</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x Knee Knocker (Hip Internal Rota...</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x Dynamic Crossbody Hamstrin...</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x 90/90 Pigeon</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x Couch Stretch (Quads)</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x Pec Stretch</div>
+                                    <div class="text-sm text-gray-700 font-medium">2x Lat Stretch</div>
+                                    <div class="text-sm text-gray-700 font-medium">1x Sleeper Stretch</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-3" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 3</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="3">
+                            <div class="workout-card bg-blue-50 border border-blue-200 rounded-lg p-3 cursor-move" draggable="true">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded">AMIT STATIC STRETCH 3-4X/WEEK</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></svg></i>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">+ 7 more exercises</p>
+                                <div class="workout-card bg-gray-50 border border-gray-200 rounded p-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-medium text-gray-700">CARDIO</span>
+                                        <span class="text-xs text-gray-500">30 min</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mt-1">1x</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-4" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 4</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="4">
+                            <div class="workout-card bg-blue-50 border border-blue-200 rounded-lg p-3 cursor-move" draggable="true">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded">UPPER 1</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></svg></i>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">+ 12 more exercises</p>
+                                <div class="workout-card bg-gray-50 border border-gray-200 rounded p-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-medium text-gray-700">FULL BODY PUSH</span>
+                                        <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">REGULAR</span>
+                                    </div>
+                                    <div class="space-y-1 mt-2">
+                                        <div class="text-xs text-gray-600">Athletic FB Push Warm-Up</div>
+                                        <div class="text-xs text-gray-600">2x Seated Leg Extension Machine</div>
+                                        <div class="text-xs text-gray-600">2x Goblet Squat</div>
+                                        <div class="text-xs text-gray-600">3x Dumbbell Single Arm Bench P...</div>
+                                        <div class="text-xs text-gray-600">3x Pec Deck</div>
+                                        <div class="text-xs text-gray-600">+ 4 more exercises</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-5" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 5</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="5">
+                        </div>
+                    </div>
+
+                    <div id="day-6" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 6</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="6">
+                            <div class="workout-card bg-blue-50 border border-blue-200 rounded-lg p-3 cursor-move" draggable="true">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded">LOWER 1</span>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-ellipsis" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"></path></svg></i>
+                                    </button>
+                                </div>
+                                <div class="text-sm text-gray-700 font-medium mb-2">Lower Body Quad Focused Joint Mo...</div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs text-blue-600 bg-blue-100 px-2 py-1 rounded">REGULAR</span>
+                                    <span class="text-xs text-gray-500">1-1.6</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="text-xs text-gray-600">2x Cable Psoas Raise</div>
+                                    <div class="text-xs text-gray-600">3x Drop Split Squat</div>
+                                    <div class="text-xs text-gray-600">+ 5 more exercises</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="day-7" class="day-column bg-white rounded-lg border border-gray-200 p-4 min-h-[600px]">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">DAY 7</h3>
+                            <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-200">
+                                <i class="text-xs" data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            </button>
+                        </div>
+                        <div class="workout-list space-y-3" data-day="7">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    <script>
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('text-mint-600', 'active');
+                item.classList.add('text-gray-600');
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('text-mint-600', 'active');
+            
+            if (element.textContent.trim() !== 'Training Hub') {
+                document.getElementById('sub-nav').style.display = 'none';
+            }
+        }
+
+        function toggleSubNav() {
+            const subNav = document.getElementById('sub-nav');
+            subNav.style.display = 'block';
+        }
+
+        function setActiveSubNav(element) {
+            document.querySelectorAll('.sub-nav-item').forEach(item => {
+                item.classList.remove('text-mint-700', 'border-mint-500', 'active');
+                item.classList.add('text-gray-600');
+                item.style.borderBottom = 'none';
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('text-mint-700', 'active');
+            element.style.borderBottom = '2px solid rgb(34 197 94)';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const workoutLists = document.querySelectorAll('.workout-list');
+            
+            workoutLists.forEach(list => {
+                new Sortable(list, {
+                    group: 'workouts',
+                    animation: 150,
+                    ghostClass: 'sortable-ghost',
+                    chosenClass: 'sortable-chosen',
+                    onEnd: function(evt) {
+                        console.log('Workout moved from day', evt.from.dataset.day, 'to day', evt.to.dataset.day);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

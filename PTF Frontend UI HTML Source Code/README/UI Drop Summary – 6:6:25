@@ -1,0 +1,151 @@
+✅ 1. Program Library (ProgramLibrary.html)
+
+Toggle: Active / Archived programs
+
+Buttons: Edit, Duplicate, Assign, Remove
+
+Clicking “Add Program” → opens modal
+
+Fix: Modal should overlay the current page (gray background)
+
+Modal Form: Name, Description, Experience Level, Cover Image
+
+Clicking "Create Program" → navigates to Program Builder
+
+✅ 2. Program Builder (ProgramBuilder.html)
+
+Editable name & description
+
+Drag & drop workouts into day slots
+
+Bug: Can't drag to empty days
+
+Reorder and insert via plus (+) button
+
+Each box = workout → clicking leads to Workout Builder
+
+✅ 3. Workout Library (WorkoutLibrary.html)
+
+Toggle tabs: Custom Workouts / PTF Workouts
+
+Buttons: Edit, Duplicate, Remove
+
+“Add Workout” → opens Workout Builder
+
+✅ 4. Workout Builder (WorkoutBuilder.html)
+
+Add: Exercises, Warmups, Circuits, Intervals, Cooldowns
+
+Drag to reorder sets, supersets, circuits
+
+Inputs: Sets, Reps, Target Weight, Rest
+
+Add/Edit workouts directly
+
+Request: Change 3-dot button to Edit button
+
+Supersets/Circuits: Drag into boxes; allow breaking sets
+
+✅ 5. Exercise Library (ExerciseLibrary.html)
+
+Tabs: All Exercises / My Exercises
+
+“Add Exercise” → opens Exercise Builder
+
+AI Autofill button fills out fields (works in Cursor)
+
+✅ 6. Exercise Builder (ExerciseBuilder.html)
+
+Input form for new exercise
+
+AI autofill should auto-populate fields based on name
+
+✅ 7. Video on Demand (VideoOnDemand.html)
+
+Static video library grid
+
+Title + Description
+
+Clicking opens video modal or playback
+
+✅ 8. Client View – Active Clients (ClientList.html)
+
+Table of clients w/ status
+
+“View Status” = modal w/ reasons
+
+Fix: Clicking name should open Client Dashboard
+
+Remove Notes column
+
+✅ 9. Client View – Pending Clients (PendingClients.html)
+
+3-step check system (Invite Sent / Accepted / Payment)
+
+Fix: Reorder columns → Payment in middle
+
+✅ 10. Inactive Clients – On Roster (InactiveOnRoster.html)
+
+Logged in within last 14 days
+
+Add: Send text, Schedule follow-up
+
+✅ 11. Inactive Clients – Off Roster (InactiveOffRoster.html)
+
+Inactive > 14 days
+
+View-only status and last login
+
+✅ 12. Groups View (Groups.html)
+
+Group chat + group list
+
+Fix: Replace “All/Online” with “Members / Forums” toggle
+
+✅ 13. Client Dashboard (ClientDashboard.html)
+
+Habit tracker, daily session, nutrition tracker
+
+Toggle between percentage vs. tile view
+
+Sleep, Recovery, Readiness (wearable integration coming)
+
+✅ 14. Client Workout Calendar (WorkoutCalendar.html)
+
+Drag & reorder sessions
+
+Save changes = updates calendar
+
+Clicking “Reorder” → opens this page
+
+✅ 15. Session Logger (SessionLogger.html)
+
+Track current workout (1 of 6, 2 of 6, etc.)
+
+Log: weight, reps, rest, notes
+
+Add Drop Set → UI already shown in file
+
+Clicking “Full Tutorial” → opens video page
+
+✅ 16. Client Chat / Forums (ChatView.html)
+
+DM with coach (white/blue bubble styling)
+
+Group chat w/ members
+
+Forum section = list view → click to expand
+
+✅ Notes to Devs
+
+All files are HTML mockups (not functional apps)
+
+Use Tailwind for styling conversion
+
+Behavior like modals, toggles, drag-drop = JS implementation needed
+
+Convert to React: class → className, onclick → onClick, etc.
+
+Suggest organizing into components (e.g., ProgramCard.jsx, WorkoutModal.jsx)
+
+Let me know if anything needs clarification.

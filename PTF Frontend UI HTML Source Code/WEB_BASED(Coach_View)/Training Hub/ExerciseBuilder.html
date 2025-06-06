@@ -1,0 +1,312 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "colors": {
+        "mint": {
+          "50": "#f0fdf4",
+          "100": "#dcfce7",
+          "200": "#bbf7d0",
+          "300": "#86efac",
+          "400": "#4ade80",
+          "500": "#22c55e",
+          "600": "#16a34a",
+          "700": "#15803d",
+          "800": "#166534"
+        }
+      },
+      "fontFamily": {
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head><body class="bg-gray-50">
+    <header id="header" class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-mint-500 rounded-lg flex items-center justify-center">
+                        <i class="text-white text-sm" data-fa-i2svg=""><svg class="svg-inline--fa fa-dumbbell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dumbbell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M96 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32V224v64V448c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32V288c-17.7 0-32-14.3-32-32s14.3-32 32-32V160c0-17.7 14.3-32 32-32H96V64zm448 0v64h32c17.7 0 32 14.3 32 32v64c17.7 0 32 14.3 32 32s-14.3 32-32 32v64c0 17.7-14.3 32-32 32H544v64c0 17.7-14.3 32-32 32H480c-17.7 0-32-14.3-32-32V288 224 64c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32zM416 224v64H224V224H416z"></path></svg></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">FitPro</span>
+                </div>
+                <nav class="flex space-x-8">
+                    <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Dashboard</span>
+                    <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Clients + Groups</span>
+                    <span class="nav-item text-mint-600 font-medium transition-colors active cursor-pointer" onclick="setActiveNav(this); toggleSubNav()">Training Hub</span>
+                    <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Nutrition Hub</span>
+                    <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">Inbox</span>
+                    <span class="nav-item text-gray-600 hover:text-mint-600 font-medium transition-colors cursor-pointer" onclick="setActiveNav(this)">AI Flows</span>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                        <i class="text-lg" data-fa-i2svg=""><svg class="svg-inline--fa fa-bell" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"></path></svg></i>
+                        <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                    </button>
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                </div>
+            </div>
+        </div>
+        
+        <div id="sub-nav" class="bg-mint-50 border-t border-mint-200 px-6 py-3">
+            <nav class="flex space-x-8">
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Program Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Workout Library</span>
+                <span class="sub-nav-item text-mint-700 font-medium border-b-2 border-mint-500 pb-2 active cursor-pointer" onclick="setActiveSubNav(this)">Exercise Library</span>
+                <span class="sub-nav-item text-gray-600 hover:text-mint-600 font-medium pb-2 transition-colors cursor-pointer" onclick="setActiveSubNav(this)">Video On-Demand</span>
+            </nav>
+        </div>
+    </header>
+
+    <div id="exercise-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div id="exercise-builder-modal" class="bg-white rounded-lg shadow-xl max-w-5xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Exercise Builder</h2>
+                <button onclick="closeExerciseModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i class="text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg></i>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <div class="grid grid-cols-3 gap-8">
+                    <div id="exercise-form-left" class="space-y-6 bg-mint-50 p-6 rounded-lg">
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Exercise Name</label>
+        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+    </div>
+    
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Video URL 1</label>
+        <p class="text-xs text-gray-500 mb-2">Paste YouTube or Vimeo URL</p>
+        <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+    </div>
+    
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Video URL 2</label>
+        <p class="text-xs text-gray-500 mb-2">Paste YouTube or Vimeo URL (optional)</p>
+        <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg border border-mint-200">
+        <h3 class="text-lg font-medium text-gray-900 mb-2">AI Autofill</h3>
+        <p class="text-sm text-gray-600 mb-4">Add exercise data in seconds</p>
+        <button class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-2 rounded-md font-medium transition-all duration-200 flex items-center space-x-2 mb-4">
+            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-wand-magic" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wand-magic" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M14.1 463.3c-18.7-18.7-18.7-49.1 0-67.9L395.4 14.1c18.7-18.7 49.1-18.7 67.9 0l34.6 34.6c18.7 18.7 18.7 49.1 0 67.9L116.5 497.9c-18.7 18.7-49.1 18.7-67.9 0L14.1 463.3zM347.6 187.6l105-105L429.4 59.3l-105 105 23.3 23.3z"></path></svg></i>
+            <span class="">AI Autofill</span>
+        </button>
+        <p class="text-xs text-gray-500 font-medium"><b>RECOMMENDED FLOW:<br></b>Enter Exercise Name and/or Video URL and let our AI fill in the rest.</p>
+    </div>
+</div>
+                    
+                    <div id="exercise-form-middle" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Muscles Trained</label>
+                            <div class="relative">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none appearance-none bg-white">
+                                    <option>Select muscle groups</option>
+                                    <option>Chest</option>
+                                    <option>Back</option>
+                                    <option>Shoulders</option>
+                                    <option>Arms</option>
+                                    <option>Legs</option>
+                                    <option>Core</option>
+                                </select>
+                                <i class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Default Unit</label>
+                            <div class="relative">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none appearance-none bg-white">
+                                    <option>Select unit</option>
+                                    <option>Reps</option>
+                                    <option>Time</option>
+                                    <option>Distance</option>
+                                    <option>Weight</option>
+                                </select>
+                                <i class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Exercise Type</label>
+                            <div class="relative">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none appearance-none bg-white">
+                                    <option>Select type</option>
+                                    <option>Strength</option>
+                                    <option>Cardio</option>
+                                    <option>Flexibility</option>
+                                    <option>Balance</option>
+                                </select>
+                                <i class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Target Goal</label>
+                            <div class="relative">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none appearance-none bg-white">
+                                    <option>Select goal</option>
+                                    <option>Strength</option>
+                                    <option>Endurance</option>
+                                    <option>Power</option>
+                                    <option>Hypertrophy</option>
+                                </select>
+                                <i class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Difficulty</label>
+                            <div class="relative">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none appearance-none bg-white">
+                                    <option>Select difficulty</option>
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                                <i class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Equipment</label>
+                            <div class="relative">
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none appearance-none bg-white">
+                                    <option>Select equipment</option>
+                                    <option>None (Bodyweight)</option>
+                                    <option>Dumbbells</option>
+                                    <option>Barbell</option>
+                                    <option>Resistance Bands</option>
+                                    <option>Machine</option>
+                                </select>
+                                <i class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" data-fa-i2svg=""><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="exercise-form-right" class="space-y-6">
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Exercise Progressions</label>
+        <p class="text-xs text-gray-500 mb-2">Harder variations of this exercise</p>
+        <div class="relative">
+            <input type="text" placeholder="Search exercise library" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+    
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Exercise Regressions</label>
+        <p class="text-xs text-gray-500 mb-2">Easier variations of this exercise</p>
+        <div class="relative">
+            <input type="text" placeholder="Search exercise library" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none">
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+    </div>
+    
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Instructions</label>
+        <textarea rows="8" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-mint-500 focus:border-transparent outline-none resize-none"></textarea>
+    </div>
+    
+    <div class="flex items-center space-x-4 pt-4">
+        <button onclick="closeExerciseModal()" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-6 py-2 rounded-md font-medium transition-colors">Save as Draft</button>
+        <button class="bg-mint-500 hover:bg-mint-600 text-white px-6 py-2 rounded-md font-medium transition-colors">Save Exercise</button>
+    </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" class="px-6 py-8">
+        <div class="max-w-7xl mx-auto">
+            <section id="exercise-library-section" class="">
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold text-gray-900">Exercise Library</h1>
+                        <button onclick="showExerciseModal()" class="bg-mint-500 hover:bg-mint-600 text-white px-6 py-3 rounded-lg font-medium flex items-center space-x-2 transition-colors">
+                            <i data-fa-i2svg=""><svg class="svg-inline--fa fa-plus" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path></svg></i>
+                            <span class="">Add New Exercise</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function showExerciseModal() {
+            document.getElementById('exercise-overlay').style.display = 'flex';
+        }
+        
+        function closeExerciseModal() {
+            document.getElementById('exercise-overlay').style.display = 'none';
+        }
+        
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('text-mint-600', 'active');
+                item.classList.add('text-gray-600');
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('text-mint-600', 'active');
+            
+            if (element.textContent.trim() !== 'Training Hub') {
+                document.getElementById('sub-nav').style.display = 'none';
+            }
+        }
+
+        function toggleSubNav() {
+            const subNav = document.getElementById('sub-nav');
+            subNav.style.display = 'block';
+        }
+
+        function setActiveSubNav(element) {
+            document.querySelectorAll('.sub-nav-item').forEach(item => {
+                item.classList.remove('text-mint-700', 'border-mint-500', 'active');
+                item.classList.add('text-gray-600');
+                item.style.borderBottom = 'none';
+            });
+            element.classList.remove('text-gray-600');
+            element.classList.add('text-mint-700', 'active');
+            element.style.borderBottom = '2px solid rgb(34 197 94)';
+        }
+    </script>
+
+
+</body></html>

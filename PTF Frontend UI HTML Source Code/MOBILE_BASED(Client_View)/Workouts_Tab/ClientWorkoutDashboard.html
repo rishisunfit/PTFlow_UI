@@ -1,0 +1,382 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>tailwind.config = {
+  "theme": {
+    "extend": {
+      "fontFamily": {
+        "sf": [
+          "SF Pro Display",
+          "system-ui",
+          "sans-serif"
+        ],
+        "sans": [
+          "Inter",
+          "sans-serif"
+        ]
+      },
+      "colors": {
+        "accent": "#10b981",
+        "accent-light": "#6ee7b7",
+        "accent-dark": "#047857",
+        "gold": "#d4af37",
+        "charcoal": "#1f2937",
+        "light-gray": "#f8fafc",
+        "mid-gray": "#64748b"
+      }
+    }
+  }
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&amp;display=swap"><style>
+      body {
+        font-family: 'Inter', sans-serif !important;
+      }
+      
+      /* Preserve Font Awesome icons */
+      .fa, .fas, .far, .fal, .fab {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+      }
+    </style><style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  </style></head>
+<body class="font-sf bg-light-gray text-charcoal max-w-md mx-auto h-screen flex flex-col">
+    <!-- Status Bar -->
+    <div id="status-bar" class="bg-white p-3 flex justify-between items-center border-b border-gray-100">
+        <div class="text-sm font-medium">9:41</div>
+        <div class="flex space-x-2 text-charcoal">
+            <i class="fa-solid fa-signal text-sm"></i>
+            <i class="fa-solid fa-wifi text-sm"></i>
+            <i class="fa-solid fa-battery-full text-sm"></i>
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div id="main-content" class="flex-1 overflow-y-auto p-6 pb-24">
+        <!-- Today's Session -->
+        <div id="todays-workout" class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-medium text-charcoal">Today's Session</h2>
+                <button class="text-accent text-sm font-medium">View All</button>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                <div class="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative">
+                    <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/f87bb8eb54-5dacafe011510304ef67.png" alt="modern gym interior with dumbbells and bench press, clean minimalist design, professional lighting">
+                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-lg text-sm font-medium">
+                        45 min
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="font-semibold text-xl text-charcoal mb-1">Upper Body Strength</h3>
+                            <p class="text-mid-gray text-sm font-light">Focus on form and control</p>
+                        </div>
+                        <span class="bg-orange-50 text-orange-600 text-sm px-3 py-1 rounded-lg font-medium">
+                            Intermediate
+                        </span>
+                    </div>
+                    <button class="w-full bg-accent hover:bg-accent-dark text-white font-semibold py-4 px-6 rounded-xl flex items-center justify-center transition-all duration-200">
+                        <i class="mr-3 fa-solid fa-play text-sm"></i>
+                        Start Session
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Calendar -->
+        <div id="my-calendar" class="mb-8">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-medium text-charcoal">My Calendar</h2>
+        <button class="text-accent text-sm font-medium">Full View</button>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-medium text-charcoal">June 2024</h3>
+            <div class="flex space-x-2">
+                <button class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-left text-mid-gray text-sm"></i>
+                </button>
+                <button class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center">
+                    <i class="fa-solid fa-chevron-right text-mid-gray text-sm"></i>
+                </button>
+            </div>
+        </div>
+        <div class="grid grid-cols-7 gap-2">
+            <div class="text-center text-xs text-mid-gray font-medium py-2">S</div>
+            <div class="text-center text-xs text-mid-gray font-medium py-2">M</div>
+            <div class="text-center text-xs text-mid-gray font-medium py-2">T</div>
+            <div class="text-center text-xs text-mid-gray font-medium py-2">W</div>
+            <div class="text-center text-xs text-mid-gray font-medium py-2">T</div>
+            <div class="text-center text-xs text-mid-gray font-medium py-2">F</div>
+            <div class="text-center text-xs text-mid-gray font-medium py-2">S</div>
+            
+            <div class="text-center text-sm text-mid-gray py-2">26</div>
+            <div class="text-center text-sm text-mid-gray py-2">27</div>
+            <div class="text-center text-sm text-mid-gray py-2">28</div>
+            <div class="text-center text-sm text-mid-gray py-2">29</div>
+            <div class="text-center text-sm text-mid-gray py-2">30</div>
+            <div class="text-center text-sm text-mid-gray py-2">31</div>
+            <div class="text-center text-sm text-charcoal py-2">1</div>
+            
+            <div class="text-center text-sm text-charcoal py-2 bg-blue-50 rounded-lg">2</div>
+            <div class="text-center text-sm text-charcoal py-2 bg-accent/10 rounded-lg">3</div>
+            <div class="text-center text-sm text-white py-2 bg-accent rounded-lg font-medium">4</div>
+            <div class="text-center text-sm text-charcoal py-2 bg-accent/10 rounded-lg">5</div>
+            <div class="text-center text-sm text-charcoal py-2">6</div>
+            <div class="text-center text-sm text-charcoal py-2 bg-orange-50 rounded-lg">7</div>
+            <div class="text-center text-sm text-charcoal py-2 bg-blue-50 rounded-lg">8</div>
+        </div>
+        <div class="flex items-center space-x-6 mt-6 text-xs">
+            <div class="flex items-center">
+                <div class="w-3 h-3 bg-accent rounded-full mr-2"></div>
+                <span class="text-mid-gray">Strength</span>
+            </div>
+            <div class="flex items-center">
+                <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                <span class="text-mid-gray">Cardio</span>
+            </div>
+            <div class="flex items-center">
+                <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                <span class="text-mid-gray">Sports</span>
+            </div>
+        </div>
+        
+        <!-- Weekly Schedule -->
+        <div class="mt-6 pt-6 border-t border-gray-100">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="font-medium text-charcoal">This Week's Schedule</h4>
+                <button class="text-accent text-sm font-medium">
+                    <i class="fa-solid fa-arrows-up-down text-sm mr-1"></i>
+                    Re-order
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Sun 02</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Cardio &amp; Mobility</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-accent rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Mon 03</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Push Day</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-accent rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Tue 04</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Upper Body Strength</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-accent rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Wed 05</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Pull Day</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-gray-300 rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Thu 06</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Rest Day</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Fri 07</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Basketball Game</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                        <span class="text-sm text-charcoal font-medium">Sat 08</span>
+                    </div>
+                    <span class="text-sm text-mid-gray">Active Recovery</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Ask Meadow -->
+        <div id="ask-meadow" class="mb-8">
+            <h2 class="text-xl font-medium text-charcoal mb-4">Ask Meadow</h2>
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div class="flex items-start space-x-4 mb-4">
+                    <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-robot text-accent text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-lg mb-2 text-charcoal">Your AI Coach</h3>
+                        <p class="text-mid-gray text-sm font-light">Ask questions about your training, nutrition, or recovery</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <input type="text" placeholder="How should I modify today's workout?" class="w-full p-4 pr-12 bg-gray-50 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-paper-plane text-white text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Workouts -->
+        <div id="video-workouts" class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-medium text-charcoal">Video Workouts</h2>
+                <button class="text-accent text-sm font-medium">See All</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                    <div class="flex">
+                        <div class="w-24 h-20 bg-gradient-to-br from-gray-100 to-gray-200 relative flex-shrink-0">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/4584e976de-5e6e9e7c27fc6eec17a6.png" alt="person doing push ups in modern gym, workout video thumbnail style">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-charcoal text-sm ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4">
+                            <h3 class="font-medium text-base text-charcoal mb-1">Full Body HIIT</h3>
+                            <p class="text-mid-gray text-sm font-light mb-2">25 min • High Intensity</p>
+                            <div class="flex items-center">
+                                <span class="bg-red-50 text-red-600 text-xs px-2 py-1 rounded-lg font-medium mr-2">Advanced</span>
+                                <span class="text-xs text-mid-gray">4.8 ⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                    <div class="flex">
+                        <div class="w-24 h-20 bg-gradient-to-br from-gray-100 to-gray-200 relative flex-shrink-0">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/c5692b697f-4cf4591cefe80bfcb600.png" alt="person doing squats with dumbbells, clean gym setting, workout video style">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-charcoal text-sm ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4">
+                            <h3 class="font-medium text-base text-charcoal mb-1">Lower Body Power</h3>
+                            <p class="text-mid-gray text-sm font-light mb-2">30 min • Strength Focus</p>
+                            <div class="flex items-center">
+                                <span class="bg-orange-50 text-orange-600 text-xs px-2 py-1 rounded-lg font-medium mr-2">Intermediate</span>
+                                <span class="text-xs text-mid-gray">4.9 ⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Mobility -->
+        <div id="video-mobility" class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-medium text-charcoal">Video Mobility</h2>
+                <button class="text-accent text-sm font-medium">See All</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                    <div class="flex">
+                        <div class="w-24 h-20 bg-gradient-to-br from-gray-100 to-gray-200 relative flex-shrink-0">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/cccb3656f0-84a0c75b8a65b1e18175.png" alt="person doing yoga stretches on mat, peaceful studio setting, mobility video style">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-charcoal text-sm ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4">
+                            <h3 class="font-medium text-base text-charcoal mb-1">Morning Flow</h3>
+                            <p class="text-mid-gray text-sm font-light mb-2">15 min • Full Body Stretch</p>
+                            <div class="flex items-center">
+                                <span class="bg-green-50 text-green-600 text-xs px-2 py-1 rounded-lg font-medium mr-2">Beginner</span>
+                                <span class="text-xs text-mid-gray">4.7 ⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+                    <div class="flex">
+                        <div class="w-24 h-20 bg-gradient-to-br from-gray-100 to-gray-200 relative flex-shrink-0">
+                            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7f35d97bc3-b0ffd0a389e8632d3532.png" alt="person doing hip flexor stretches, clean modern studio, mobility routine">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-charcoal text-sm ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4">
+                            <h3 class="font-medium text-base text-charcoal mb-1">Hip Mobility</h3>
+                            <p class="text-mid-gray text-sm font-light mb-2">20 min • Lower Body Focus</p>
+                            <div class="flex items-center">
+                                <span class="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-lg font-medium mr-2">All Levels</span>
+                                <span class="text-xs text-mid-gray">4.8 ⭐</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <div id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-100 py-3 px-6 max-w-md mx-auto">
+        <div class="flex justify-between items-center">
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-house text-lg mb-1"></i>
+                <span class="text-xs font-light">Home</span>
+            </div>
+            <div class="flex flex-col items-center text-accent">
+                <i class="fa-solid fa-dumbbell text-lg mb-1"></i>
+                <span class="text-xs font-medium">Workouts</span>
+            </div>
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-inbox text-lg mb-1"></i>
+                <span class="text-xs font-light">Inbox</span>
+            </div>
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-utensils text-lg mb-1"></i>
+                <span class="text-xs font-light">Nutrition</span>
+            </div>
+            <div class="flex flex-col items-center text-mid-gray">
+                <i class="fa-solid fa-user text-lg mb-1"></i>
+                <span class="text-xs font-light">Profile</span>
+            </div>
+        </div>
+    </div>
+
+
+</body></html>
